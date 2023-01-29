@@ -7,7 +7,7 @@ app = Flask(__name__)
 # def hello_world():  # put application's code here
 #     return 'Hello World!'
 
-app.debug = True  #
+app.debug = False  #
 USERS = {
     1: {'name': 'A', 'age': '18', 'gender': 'man', 'text': 'Cute'},
     2: {'name': 'B', 'age': '20', 'gender': 'man', 'text': 'Warm'},
@@ -27,7 +27,7 @@ def detail(nid):
     return render_template('detail.html', info=info)  #
 
 
-@app.route('/login', methods=['GET', 'POST'], endpoint='l1')  # endpoint 表示别名
+@app.route('/', methods=['GET', 'POST'], endpoint='l1')  # endpoint 表示别名
 def login():
     # return redirect('https://www.google.com')
     if request.method == 'GET':
@@ -42,12 +42,13 @@ def login():
         return render_template('login.html', error='error password or username')  #
 
 
-@app.route('/index', methods=['GET'])
-def index():
-    user = session.get('user_info')
-    if not user:
-        return redirect('/login') #
-    return render_template('index.html', user_dict=USERS)
+# @app.route('/index', methods=['GET'])
+# def index():
+#     user = session.get('user_info')
+#     if not user:
+#         return redirect('/login') #
+#     return render_template('index.html', user_dict=USERS)
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)
