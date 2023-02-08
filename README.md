@@ -10,3 +10,8 @@ Containerization is optional, but recommended
 Week1   
 Set up the flask project  
 Use Github Actions to manage the code  
+
+Week2  
+Finish the GithubAction operation  
+use containe(docker)  
+use aws to dploy the code  
