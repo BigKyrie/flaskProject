@@ -1,9 +1,8 @@
 # from flask import Flask
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
-
-
 
 # @app.route('/')
 # def hello_world():  # put application's code here
@@ -20,6 +19,7 @@ USERS = {
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,14 +60,15 @@ def delete(todo_id):
     db.session.commit()
     return redirect(url_for("home"))
 
+
 if __name__ == "__main__":
     app.app_context().push()
     db.create_all()
 
-    new_todo = Todo(title = "todo 1", complete = False)
+    new_todo = Todo(title="todo 1", complete=False)
     db.session.add(new_todo)
     db.session.commit()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8090, debug=False)
 # @app.route('/detail/<int:nid>', methods=['GET'])  #
 # def detail(nid):
 #     user = session.get('user_info')
@@ -99,5 +100,3 @@ if __name__ == "__main__":
 #     if not user:
 #         return redirect('/login') #
 #     return render_template('index.html', user_dict=USERS)
-
-
